@@ -5,102 +5,166 @@
 <title>Lanchonete do Mikis</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- React -->
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-
-<!-- React Router -->
-<script src="https://unpkg.com/react-router-dom@6.22.3/umd/react-router-dom.production.min.js"></script>
-
 <style>
-body{margin:0;font-family:Arial;background:#f4f4f4}
-header{background:#d32f2f;color:#fff;padding:20px;text-align:center}
-nav{background:#b71c1c;padding:10px;text-align:center}
-nav a{color:#fff;margin:0 10px;text-decoration:none;font-weight:bold}
-.container{max-width:1200px;margin:auto;padding:20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.card{background:#fff;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,.1);overflow:hidden}
-.card img{width:100%;height:160px;object-fit:cover}
-.card-content{padding:15px}
-.price{color:#2e7d32;font-weight:bold}
-button{margin-top:10px;width:100%;padding:10px;border:none;border-radius:5px;background:#25d366;color:#fff;font-weight:bold;cursor:pointer}
-footer{background:#222;color:#fff;text-align:center;padding:15px;margin-top:40px}
+body { margin:0; font-family:Arial, sans-serif; background:#f4f4f4; }
+header { background:#d32f2f; color:#fff; padding:20px; text-align:center; }
+nav { background:#b71c1c; padding:10px; text-align:center; }
+nav a { color:#fff; margin:0 10px; text-decoration:none; font-weight:bold; }
+
+.container { max-width:1200px; margin:auto; padding:20px; }
+h2 { margin-top:40px; }
+
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; }
+.card { background:#fff; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1); overflow:hidden; }
+.card img { width:100%; height:160px; object-fit:cover; }
+.card-content { padding:15px; }
+.price { color:#2e7d32; font-weight:bold; }
+
+button {
+  margin-top:10px;
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:5px;
+  background:#25d366;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+footer { background:#222; color:#fff; text-align:center; padding:15px; margin-top:40px; }
+.hidden { display:none; }
 </style>
 </head>
 <body>
 
-<div id="root"></div>
+<header>
+  <h1>🍔 Lanchonete do Mikis</h1>
+  <p>Monte seu pedido e envie pelo WhatsApp</p>
+</header>
+
+<nav>
+  <a href="#/lanches">Lanches</a>
+  <a href="#/hotdogs">Hot Dogs</a>
+  <a href="#/bebidas">Bebidas</a>
+  <a href="#/sobremesas">Sobremesas</a>
+  <a href="#/carrinho">Carrinho</a>
+</nav>
+
+<div class="container">
+
+<!-- LANCHES -->
+<section id="lanches" class="page">
+  <h2>🍔 Lanches</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
+      <div class="card-content">
+        <h3>X-Burger</h3>
+        <p class="price">R$ 12</p>
+        <button onclick="add('X-Burger',12)">Adicionar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOT DOGS -->
+<section id="hotdogs" class="page hidden">
+  <h2>🌭 Hot Dogs</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be43">
+      <div class="card-content">
+        <h3>Hot Dog Simples</h3>
+        <p class="price">R$ 8</p>
+        <button onclick="add('Hot Dog Simples',8)">Adicionar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEBIDAS -->
+<section id="bebidas" class="page hidden">
+  <h2>🥤 Bebidas</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699">
+      <div class="card-content">
+        <h3>Refrigerante</h3>
+        <p class="price">R$ 5</p>
+        <button onclick="add('Refrigerante',5)">Adicionar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBREMESAS -->
+<section id="sobremesas" class="page hidden">
+  <h2>🍰 Sobremesas</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1541976076758-347942db197b">
+      <div class="card-content">
+        <h3>Bolo</h3>
+        <p class="price">R$ 6</p>
+        <button onclick="add('Bolo',6)">Adicionar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARRINHO -->
+<section id="carrinho" class="page hidden">
+  <h2>🛒 Carrinho</h2>
+  <ul id="items"></ul>
+  <p><strong>Total: R$ <span id="total">0</span></strong></p>
+  <button onclick="sendWhats()">Enviar Pedido no WhatsApp</button>
+</section>
+
+</div>
+
+<footer>
+  <p>© 2026 - Lanchonete do Mikis</p>
+</footer>
 
 <script>
-const e = React.createElement;
-const { HashRouter, Routes, Route, Link } = ReactRouterDOM;
+let cart = [];
+let total = 0;
 
-function Card(props){
-  return e("div",{className:"card"},
-    e("img",{src:props.img}),
-    e("div",{className:"card-content"},
-      e("h3",null,props.name),
-      e("p",{className:"price"},"R$ "+props.price),
-      e("button",{onClick:()=>props.add(props.name,props.price)},"Adicionar")
-    )
-  );
+function add(name, price){
+  cart.push({name, price});
+  total += price;
+  document.getElementById("total").innerText = total;
+  renderCart();
 }
 
-function Section(props){
-  return e("div",{className:"container"},
-    e("h2",null,props.title),
-    e("div",{className:"grid"},
-      props.items.map((i,idx)=>e(Card,{...i,add:props.add,key:idx}))
-    )
-  );
+function renderCart(){
+  const ul = document.getElementById("items");
+  ul.innerHTML = "";
+  cart.forEach(i => {
+    const li = document.createElement("li");
+    li.textContent = i.name + " - R$ " + i.price;
+    ul.appendChild(li);
+  });
 }
 
-function Cart(props){
-  function send(){
-    const msg="Pedido:%0A"+props.cart.map(i=>i.name+" - R$ "+i.price).join("%0A")+"%0A%0ATotal: R$ "+props.total;
-    window.open("https://wa.me/5599999999999?text="+msg);
-  }
-  return e("div",{className:"container"},
-    e("h2",null,"🛒 Carrinho"),
-    e("ul",null,props.cart.map((i,k)=>e("li",{key:k},i.name+" - R$ "+i.price))),
-    e("p",null,e("strong",null,"Total: R$ "+props.total)),
-    e("button",{onClick:send},"Enviar Pedido no WhatsApp")
-  );
+function sendWhats(){
+  const msg = "Pedido:%0A" +
+    cart.map(i => i.name + " - R$ " + i.price).join("%0A") +
+    "%0A%0ATotal: R$ " + total;
+  window.open("https://wa.me/5599999999999?text=" + msg);
 }
 
-function App(){
-  const [cart,setCart]=React.useState([]);
-  const [total,setTotal]=React.useState(0);
-
-  function add(n,p){
-    setCart([...cart,{name:n,price:p}]);
-    setTotal(total+p);
-  }
-
-  const lanches=[
-    {name:"X-Burger",price:12,img:"https://images.unsplash.com/photo-1550547660-d9450f859349"},
-    {name:"X-Salada",price:14,img:"https://images.unsplash.com/photo-1586190848861-99aa4a171e90"},
-    {name:"X-Bacon",price:16,img:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd"}
-  ];
-
-  return e(HashRouter,null,
-    e("header",null,
-      e("h1",null,"🍔 Lanchonete do Mikis"),
-      e("p",null,"Monte seu pedido e envie pelo WhatsApp")
-    ),
-    e("nav",null,
-      e(Link,{to:"/"},"Lanches")," | ",
-      e(Link,{to:"/carrinho"},"Carrinho")
-    ),
-    e(Routes,null,
-      e(Route,{path:"/",element:e(Section,{title:"🍔 Lanches",items:lanches,add})}),
-      e(Route,{path:"/carrinho",element:e(Cart,{cart,total})})
-    ),
-    e("footer",null,"© 2026 - Lanchonete do Mikis")
-  );
+/* ROTEAMENTO POR HASH */
+function router(){
+  const hash = location.hash.replace("#/","") || "lanches";
+  document.querySelectorAll(".page").forEach(p => p.classList.add("hidden"));
+  const page = document.getElementById(hash);
+  if(page) page.classList.remove("hidden");
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(e(App));
+window.addEventListener("hashchange", router);
+router();
 </script>
 
 </body>
