@@ -1,43 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Lanchonete do Mikis</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body { margin:0; font-family:Arial, sans-serif; background:#f4f4f4; }
+header { background:#d32f2f; color:#fff; padding:20px; text-align:center; }
+nav { background:#b71c1c; padding:10px; text-align:center; }
+nav a { color:#fff; margin:0 10px; text-decoration:none; font-weight:bold; }
+
+.container { max-width:1200px; margin:auto; padding:20px; }
+h2 { margin-top:40px; }
+
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; }
+.card { background:#fff; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1); overflow:hidden; }
+.card img { width:100%; height:160px; object-fit:cover; }
+.card-content { padding:15px; }
+.price { color:#2e7d32; font-weight:bold; }
+
+button {
+  margin-top:10px;
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:5px;
+  background:#25d366;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+footer { background:#222; color:#fff; text-align:center; padding:15px; margin-top:40px; }
+.hidden { display:none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🍔 Lanchonete do Mikis</h1>
+  <p>Monte seu pedido e envie pelo WhatsApp</p>
+</header>
+
+<nav>
+  <a href="#/lanches">Lanches</a>
+  <a href="#/hotdogs">Hot Dogs</a>
+  <a href="#/bebidas">Bebidas</a>
+  <a href="#/sobremesas">Sobremesas</a>
+  <a href="#/carrinho">Carrinho</a>
+</nav>
+
+<div class="container">
+
+<!-- LANCHES -->
 <section id="lanches" class="page">
   <h2>🍔 Lanches</h2>
   <div class="grid">
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
-      <div class="card-content">
-        <h3>X-Burger</h3>
-        <p class="price">R$ 12</p>
-        <button onclick="add('X-Burger',12)">Adicionar</button>
-      </div>
-    </div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349"><div class="card-content"><h3>X-Burger</h3><p class="price">R$ 12</p><button onclick="add('X-Burger',12)">Adicionar</button></div></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd"><div class="card-content"><h3>X-Salada</h3><p class="price">R$ 14</p><button onclick="add('X-Salada',14)">Adicionar</button></div></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add"><div class="card-content"><h3>X-Bacon</h3><p class="price">R$ 16</p><button onclick="add('X-Bacon',16)">Adicionar</button></div></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1550317138-10000687a72b"><div class="card-content"><h3>X-Egg</h3><p class="price">R$ 15</p><button onclick="add('X-Egg',15)">Adicionar</button></div></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d"><div class="card-content"><h3>X-Tudo</h3><p class="price">R$ 20</p><button onclick="add('X-Tudo',20)">Adicionar</button></div></div>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd">
-      <div class="card-content">
-        <h3>X-Salada</h3>
-        <p class="price">R$ 14</p>
-        <button onclick="add('X-Salada',14)">Adicionar</button>
-      </div>
-    </div>
+  </div>
+</section>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add">
-      <div class="card-content">
-        <h3>X-Bacon</h3>
-        <p class="price">R$ 16</p>
-        <button onclick="add('X-Bacon',16)">Adicionar</button>
-      </div>
-    </div>
+<!-- HOT DOGS -->
+<section id="hotdogs" class="page hidden">
+  <h2>🌭 Hot Dogs</h2>
+  <div class="grid">
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1550317138-10000687a72b">
-      <div class="card-content">
-        <h3>X-Egg</h3>
-        <p class="price">R$ 15</p>
-        <button onclick="add('X-Egg',15)">Adicionar</button>
-      </div>
-    </div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1594007654729-407eedc4be43"><div class="card-content"><h3>Simples</h3><p class="price">R$ 8</p><button onclick="add('Hot Dog Simples',8)">Adicionar</button></div></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1604908177522-040bbd7f97c6"><div class="card-content"><h3>Completo</h3><p class="price">R$ 12</p><button onclick="add('Hot Dog Completo',12)">Adicionar</button></div></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1617093727343-374698b1b08d"><div class="card-content"><h3>Bacon</h3><p class="price">R$ 14</p><button onclick="add('Hot Dog Bacon',14)">Adicionar</button></div></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1585238342028-4bbc3b71d4aa"><div class="card-content"><h3>Frango</h3><p class="price">R$ 13</p><button onclick="add('Hot Dog Frango',13)">Adicionar</button></div></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1625944525580-bd3d0c9bfc3d"><div class="card-content"><h3>Especial</h3><p class="price">R$ 16</p><button onclick="add('Hot Dog Especial',16)">Adicionar</button></div></div>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56">
-      <div class
+  </div>
+</section>
+
+<!-- BEBIDAS -->
+<section id="bebidas" class="page hidden">
+  <h2>🥤 Bebidas</h2>
+  <div class="grid">
+
+    <div class="card"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699"><div class="card-content"><h3>Refrigerante Lata</h3><p class="price">R$ 5</p><button onclick="add('Refrigerante Lata',5)">Adicionar</button></div></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1527960471264-932f39eb5846"><div class="card-content"><h3>Refrigerante 1L</h3><p class="price">R$ 7</p><button onclick="add('Refrigerante 1L',7)">Adicionar</button></div></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03"><div class="card-content"><h3>Suco Natural</h3><p class="price">R$ 6</p><button onclick="add('Suco Natural',6)">Adicionar</button></div></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1604908177225-6b1b7d20f7c9"><div class="card-content"><h3>Água</h3><p class="price">R$ 3</p><button onclick="add('Água',3)">Adicionar</button></div></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1585238342028-4bbc3b71d4aa"><div class="card-content"><h3>Energético</h3><p class="price">R$ 10</p><button onclick="add('Energético',10)">Adicionar</button></div></div>
+
+  </div>
+</section>
+
+<!-- SOBREMESAS -->
+<section id="sobremesas" class="page hidden">
+  <h2>🍰 Sobremesas</h2>
+  <div class="grid">
+
+    <div class="card"><img src="https://images.unsplash.com/photo-1541976076758-347942db197b"><div class="card-content"><h3>Bolo</h3><p class="price">R$ 6</p><button onclick="add('Bolo',6)">Adicionar</button></div></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1505253758473-96b7015fcd40"><div class="card-content"><h3>Pudim</h3><p class="price">R$ 5</p><button onclick="add('Pudim',5)">Adicionar</button></div></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836"><div class="card-content"><h3>Mousse</h3><p class="price">R$ 5</p><button onclick="add('Mousse',5)">Adicionar</button></div></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1614707267537-8a3c88f3c40d"><div class="card-content"><h3>Brownie</h3><p class="price">R$ 7</p><button onclick="add('Brownie',7)">Adicionar</button></div></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb"><div class="card-content"><h3>Sorvete</h3><p class="price">R$ 4</p><button onclick="add('Sorvete',4)">Adicionar</button></div></div>
+
+  </div>
+</section>
+
+<!-- CARRINHO -->
+<section id="carrinho" class="page hidden">
+  <h2>🛒 Carrinho</h2>
+  <ul id="items"></ul>
+  <p><strong>Total: R$ <span id="total">0</span></strong></p>
+  <button onclick="sendWhats()">Enviar Pedido no WhatsApp</button>
+</section>
+
+</div>
+
+<footer>
+  <p>© 2026 - Lanchonete do Mikis</p>
+</footer>
+
+<script>
+let cart = [];
+let total = 0;
+
+function add(name, price){
+  cart.push({name, price});
+  total += price;
+  document.getElementById("total").innerText = total;
+  renderCart();
+}
+
+function renderCart(){
+  const ul = document.getElementById("items");
+  ul.innerHTML = "";
+  cart.forEach(i => {
+    const li = document.createElement("li");
+    li.textContent = i.name + " - R$ " + i.price;
+    ul.appendChild(li);
+  });
+}
+
+function sendWhats(){
+  const msg = "Pedido:%0A" +
+    cart.map(i => i.name + " - R$ " + i.price).join("%0A") +
+    "%0A%0ATotal: R$ " + total;
+  window.open("https://wa.me/5599999999999?text=" + msg);
+}
+
+function router(){
+  const hash = location.hash.replace("#/","") || "lanches";
+  document.querySelectorAll(".page").forEach(p => p.classList.add("hidden"));
+  const page = document.getElementById(hash);
+  if(page) page.classList.remove("hidden");
+}
+
+window.addEventListener("hashchange", router);
+router();
+</script>
+
+</body>
+</html>
